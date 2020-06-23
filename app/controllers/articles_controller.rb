@@ -42,7 +42,6 @@ class ArticlesController < ApplicationController
     redirect_to root_path, notice: '削除成功'
   end
 
-
   private
   def article_params
     params.require(:article).permit(:title, :content)

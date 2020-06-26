@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
 before_action :set_article, only: [:show, :edit, :update]
 
   def index
+      raise StandardError
       @articles = Article.all
   end
 
@@ -25,7 +26,6 @@ before_action :set_article, only: [:show, :edit, :update]
 
   def edit
   end
-
 
   def update
     if @article.update(article_params)

@@ -26,8 +26,6 @@ class Article < ApplicationRecord
     private
     def  validate_title_and_content_length
         char_count = self.title.length + self.content.length
-        errors.add(:content, '100文字以上にする' ) unless char_count > 100
-        end
+        errors.add(:content, '100文字以上にする') unless char_count > 100
     end
-
 end

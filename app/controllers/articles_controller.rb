@@ -3,11 +3,11 @@ before_action :set_article, only: [:show]
 before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-      @articles = Article.all
+    @articles = Article.all
   end
 
   def show
-
+    @comments = @article.comments
   end
 
   def new

@@ -1,13 +1,12 @@
 class ArticlesController < ApplicationController
-before_action :set_article, only: [:show]
-before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_article, only: [:show]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @articles = Article.all
   end
 
   def show
-    @comments = @article.comments
   end
 
   def new
@@ -15,11 +14,11 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
   end
 
   def create
-    @article = current_user.article.build(article_params)
-    if  @article.save
-      redirect_to article_path(@article), notice: '保存完了'
+    @article = current_user.articles.build(article_params)
+    if @article.save
+      redirect_to article_path(@article), notice: '保存できたよ'
     else
-      flash.now[:error] = '保存失敗'
+      flash.now[:error] = '保存に失敗しました'
       render :new
     end
   end
@@ -31,9 +30,9 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
   def update
     @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
-      redirect_to article_path(@article), notice: '更新完了'
+      redirect_to article_path(@article), notice: '更新できました'
     else
-      flash.now[:error] = '更新失敗'
+      flash.now[:error] = '更新できませんでした'
       render :edit
     end
   end
@@ -41,7 +40,7 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
   def destroy
     article = current_user.articles.find(params[:id])
     article.destroy!
-    redirect_to root_path, notice: '削除成功'
+    redirect_to root_path, notice: '削除に成功しました'
   end
 
   private
@@ -52,5 +51,4 @@ before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destro
   def set_article
     @article = Article.find(params[:id])
   end
-
 end
